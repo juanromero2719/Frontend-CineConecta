@@ -1,30 +1,6 @@
 {
   "version": 4,
   "routes": {
-    "/": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/",
-      "dataRoute": "/index.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/favicon.ico": {
       "initialHeaders": {
         "cache-control": "public, max-age=0, must-revalidate",
@@ -53,13 +29,37 @@
         "x-next-revalidated-tags",
         "x-next-revalidate-tag-token"
       ]
+    },
+    "/": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/",
+      "dataRoute": "/index.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
     }
   },
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "161efd26b0b3e05d3a64b0b36d0cdaaa",
-    "previewModeSigningKey": "0f7569eaf0517abc172debf1eaf91e50d7743075b783dbed966ce59e355fdef3",
-    "previewModeEncryptionKey": "185b2c31fceb96bfb47f00bbaa581a1c5d22a9a75ab577bb22c0f19a58e2a54b"
+    "previewModeId": "ec56074377e2bc2d9a36c516cff74ef4",
+    "previewModeSigningKey": "d3fafaa503c3d400c3f397a1f785b385a89833c6dcfdf6a8744009a183f85b8a",
+    "previewModeEncryptionKey": "da2466ab2ad98cc71f653235430a7b75e65fc75c481bb660a80723cc5c3066a5"
   }
 }
