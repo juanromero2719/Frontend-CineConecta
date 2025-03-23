@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://E%3A/proyectos%20de%20programacion/Frontend-cineConecta/cineconecta/src/app/%28auth%29/layout.tsx"],"sourcesContent":["'use client';\r\n\r\nimport React from 'react';\r\nimport Link from 'next/link';\r\n\r\nimport Header from '@/../components/header'\r\n\r\nexport default function AuthLayout({ children }: { children: React.ReactNode; }) {\r\n    \r\n    return (\r\n        <>\r\n        \r\n            <Header/>\r\n\r\n            <main className=\" py-6 px-4 bg-ccDarkGray\">\r\n                {children}\r\n            </main>\r\n            \r\n        </>\r\n    );\r\n}"],"names":[],"mappings":";;;;AAKA;AALA;;;AAOe,SAAS,WAAW,EAAE,QAAQ,EAAkC;IAE3E,qBACI;;0BAEI,8OAAC,qHAAA,CAAA,UAAM;;;;;0BAEP,8OAAC;gBAAK,WAAU;0BACX;;;;;;;;AAKjB","debugId":null}}]
+}
