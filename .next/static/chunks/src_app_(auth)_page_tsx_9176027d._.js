@@ -9,7 +9,7 @@
     "static/chunks/node_modules_axios_lib_99999129._.js",
     "static/chunks/node_modules_sweetalert2_dist_sweetalert2_all_b240e9f2.js",
     "static/chunks/node_modules_aef07077._.js",
-    "static/chunks/_38823e5c._.js"
+    "static/chunks/_913baf5c._.js"
   ],
   "source": "dynamic"
 });

@@ -2,12 +2,15 @@
 
 import React, { useState } from 'react';
 import Input from '@/../components/input';
+import { useRegisterUser } from '@/app/(auth)/hooks/useRegisterUser';
 
 interface CardLoginRegisterProps {
     onSubmit: (data: { name: string; email: string; password: string }) => void;
 }
 
-const CardLoginRegister: React.FC<CardLoginRegisterProps> = ({ onSubmit }) => {
+const CardLoginRegister: React.FC<CardLoginRegisterProps> = () => {
+
+    const { registerUser, loading } = useRegisterUser();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -22,10 +25,19 @@ const CardLoginRegister: React.FC<CardLoginRegisterProps> = ({ onSubmit }) => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(formData);
-    };
+        try {
+          await registerUser(formData.name, formData.email, formData.password);
+
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            console.error('Error al iniciar sesión:', error.message);
+          } else {
+            console.error('Error desconocido al registrarse');
+          }
+        }
+      };
 
     return (
         <div className="max-w-md w-full mx-auto bg-transparent rounded-lg  px-8 py-2">
@@ -71,12 +83,15 @@ const CardLoginRegister: React.FC<CardLoginRegisterProps> = ({ onSubmit }) => {
                     />
 
                 </div>
+                
                 <button
                     type="submit"
-                    className="w-full bg-blue-600 text-lg text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                    Registrarse
+                    disabled={loading}
+                    className="w-full text-lg bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                    {loading ? 'Cargando...' : 'Registrarse'}
                 </button>
+
             </form>
         </div>
     );
