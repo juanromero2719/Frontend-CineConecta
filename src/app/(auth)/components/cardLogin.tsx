@@ -52,11 +52,7 @@ export default function Register() {
 
         <div className="mt-6 h-[300px] overflow-hidden">
           {activeTab === 'login' ? (
-            <CardLogin_Login
-              onSubmit={(email: string, password: string) => {
-                console.log('Login:', { email, password });
-              }}
-            />
+            <CardLogin_Login />
           ) : (
             <CardLogin_Register
               onSubmit={(data: { name: string; email: string; password: string }) => {
