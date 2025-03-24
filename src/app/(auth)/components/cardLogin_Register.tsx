@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Input from '@/../components/input';
 import { useRegisterUser } from '@/app/(auth)/hooks/useRegisterUser';
+import { showSuccess } from '@/../utilities/notifications';
 
 interface CardLoginRegisterProps {
     onSubmit: (data: { name: string; email: string; password: string }) => void;
@@ -28,15 +29,10 @@ const CardLoginRegister: React.FC<CardLoginRegisterProps> = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-          await registerUser(formData.name, formData.email, formData.password);
+          const response = await registerUser(formData.name, formData.email, formData.password);
+            if(response !== null){ showSuccess('Registro exitoso', 'Usuario registrado correctamente'); }
 
-        } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.error('Error al iniciar sesión:', error.message);
-          } else {
-            console.error('Error desconocido al registrarse');
-          }
-        }
+        } catch  { }
       };
 
     return (
@@ -83,7 +79,7 @@ const CardLoginRegister: React.FC<CardLoginRegisterProps> = () => {
                     />
 
                 </div>
-                
+
                 <button
                     type="submit"
                     disabled={loading}

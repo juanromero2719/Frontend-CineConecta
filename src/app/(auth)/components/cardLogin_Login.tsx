@@ -15,14 +15,7 @@ const CardLogin: React.FC = () => {
     try {
       const response = await loginUser(email, password);
       console.log('Login exitoso. Token recibido:', response.token);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Error al iniciar sesión:', error.message);
-      } else {
-        console.error('Error desconocido al iniciar sesión');
-      }
-    }
-  };
+    } catch  {} };
 
   return (
     <div className="bg-transparent px-8 py-2 max-w-md w-full">
