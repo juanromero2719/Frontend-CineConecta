@@ -199,8 +199,12 @@ const loginAdapter = {
         try {
             return await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$axiosInstance$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["axiosInstance"].post('/login', payload);
         } catch (error) {
-            const message = error?.response?.data?.message || 'Ocurrió un error inesperado.';
-            throw new Error(message);
+            if (error && typeof error === 'object' && error.isAxiosError) {
+                const axiosError = error;
+                const message = axiosError.response?.data?.error || 'Ocurrió un error inesperado.';
+                throw new Error(message);
+            }
+            throw new Error('Ocurrió un error inesperado.');
         }
     }
 };
@@ -334,7 +338,11 @@ const CardLogin = ()=>{
             const response = await loginUser(email, password);
             console.log('Login exitoso. Token recibido:', response.token);
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
+            if (error instanceof Error) {
+                console.error('Error al iniciar sesión:', error.message);
+            } else {
+                console.error('Error desconocido al iniciar sesión');
+            }
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -353,12 +361,12 @@ const CardLogin = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                        lineNumber: 28,
+                        lineNumber: 31,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                    lineNumber: 27,
+                    lineNumber: 30,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -372,12 +380,12 @@ const CardLogin = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                        lineNumber: 39,
+                        lineNumber: 42,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                    lineNumber: 38,
+                    lineNumber: 41,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -387,18 +395,18 @@ const CardLogin = ()=>{
                     children: loading ? 'Cargando...' : 'Ingresar'
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                    lineNumber: 49,
+                    lineNumber: 52,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-            lineNumber: 26,
+            lineNumber: 29,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-        lineNumber: 25,
+        lineNumber: 28,
         columnNumber: 5
     }, this);
 };
