@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Input from '@/../components/input';
 import { useLoginUser } from '@/app/(auth)/hooks/useLoginUser';
+import Swal from 'sweetalert2';
 
 const CardLogin: React.FC = () => {
     
@@ -15,7 +16,7 @@ const CardLogin: React.FC = () => {
     try {
       const response = await loginUser(email, password);
       console.log('Login exitoso. Token recibido:', response.token);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error al iniciar sesión:', error);
     }
   };

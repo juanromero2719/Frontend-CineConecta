@@ -210,6 +210,64 @@ const axiosInstance = __TURBOPACK__imported__module__$5b$project$5d2f$node_modul
     baseURL: `https://backend-alpha-pearl-61.vercel.app/api/`
 });
 }}),
+"[project]/utilities/handleApiError.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+// handleApiError.ts
+__turbopack_context__.s({
+    "handleApiError": (()=>handleApiError)
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sweetalert2/dist/sweetalert2.esm.all.js [app-ssr] (ecmascript)");
+;
+const handleApiError = (statusCode, serverMessage)=>{
+    if (serverMessage) {
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Error', serverMessage, 'error');
+        return;
+    }
+    switch(statusCode){
+        case 400:
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Solicitud incorrecta', 'Verifica los datos enviados.', 'warning');
+            break;
+        case 401:
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('No autorizado', 'Tu sesión ha expirado o es inválida.', 'error');
+            break;
+        case 403:
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Prohibido', 'No tienes permisos para esta acción.', 'error');
+            break;
+        case 404:
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('No encontrado', 'Recurso no disponible o incorrecto.', 'info');
+            break;
+        case 500:
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Error del servidor', 'Intenta más tarde.', 'error');
+            break;
+        default:
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Error inesperado', 'Ocurrió un error no controlado.', 'error');
+    }
+};
+}}),
+"[project]/interceptors/axiosInterceptor.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({});
+var __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$axiosInstance$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/services/axiosInstance.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$utilities$2f$handleApiError$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/utilities/handleApiError.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sweetalert2/dist/sweetalert2.esm.all.js [app-ssr] (ecmascript)");
+;
+;
+;
+__TURBOPACK__imported__module__$5b$project$5d2f$services$2f$axiosInstance$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["axiosInstance"].interceptors.response.use((response)=>response, (error)=>{
+    if (error?.response?.status) {
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$utilities$2f$handleApiError$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["handleApiError"])(error.response.status, error.response.data?.error);
+    } else {
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Sin conexión', 'Revisa tu internet o intenta más tarde.', 'error');
+    }
+    return Promise.reject(error);
+});
+}}),
 "[project]/src/app/(auth)/adapters/login.adapter.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -218,7 +276,9 @@ var { g: global, __dirname } = __turbopack_context__;
 __turbopack_context__.s({
     "loginAdapter": (()=>loginAdapter)
 });
+var __TURBOPACK__imported__module__$5b$project$5d2f$interceptors$2f$axiosInterceptor$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/interceptors/axiosInterceptor.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$axiosInstance$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/services/axiosInstance.ts [app-ssr] (ecmascript)");
+;
 ;
 const loginAdapter = {
     async loginUser (payload) {
@@ -291,19 +351,15 @@ const useLoginUser = ()=>{
     const [loginData, setLoginData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const { loading, callEndpoint } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useFetchAndLoad$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])();
     const loginUser = async (email, password)=>{
-        try {
-            const userPayload = {
-                email,
-                password
-            };
-            const result = await callEndpoint({
-                call: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$auth$292f$adapters$2f$login$2e$adapter$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["loginAdapter"].loginUser(userPayload)
-            });
-            setLoginData(result.data || null);
-            return result.data;
-        } catch (error) {
-            throw new Error(error.error);
-        }
+        const userPayload = {
+            email,
+            password
+        };
+        const result = await callEndpoint({
+            call: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$auth$292f$adapters$2f$login$2e$adapter$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["loginAdapter"].loginUser(userPayload)
+        });
+        setLoginData(result.data || null);
+        return result.data;
     };
     return {
         loginUser,
@@ -324,9 +380,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$input$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/input.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$auth$292f$hooks$2f$useLoginUser$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/(auth)/hooks/useLoginUser.ts [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sweetalert2/dist/sweetalert2.esm.all.js [app-ssr] (ecmascript)");
 'use client';
-;
 ;
 ;
 ;
@@ -341,8 +395,7 @@ const CardLogin = ()=>{
             const response = await loginUser(email, password);
             console.log('Login exitoso. Token recibido:', response.token);
         } catch (error) {
-            console.log(error);
-            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$esm$2e$all$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].fire('Error al iniciar sesión', error, 'error');
+            console.error('Error al iniciar sesión:', error);
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -361,12 +414,12 @@ const CardLogin = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                        lineNumber: 29,
+                        lineNumber: 28,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                    lineNumber: 28,
+                    lineNumber: 27,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -380,12 +433,12 @@ const CardLogin = ()=>{
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                        lineNumber: 40,
+                        lineNumber: 39,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                    lineNumber: 39,
+                    lineNumber: 38,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -395,18 +448,18 @@ const CardLogin = ()=>{
                     children: loading ? 'Cargando...' : 'Ingresar'
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-                    lineNumber: 50,
+                    lineNumber: 49,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-            lineNumber: 27,
+            lineNumber: 26,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(auth)/components/cardLogin_Login.tsx",
-        lineNumber: 26,
+        lineNumber: 25,
         columnNumber: 5
     }, this);
 };
@@ -662,4 +715,4 @@ function Register() {
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__e95d9258._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__d5f8baf8._.js.map
