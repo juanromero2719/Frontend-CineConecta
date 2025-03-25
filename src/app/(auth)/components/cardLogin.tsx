@@ -56,7 +56,7 @@ export default function Register() {
           ) : (
             <CardLogin_Register
               onSubmit={(data: { name: string; email: string; password: string }) => {
-                console.log('Register:', data);
+                console.log(data);
               }}
             />
           )}
