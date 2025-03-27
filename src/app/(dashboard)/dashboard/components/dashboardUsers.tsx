@@ -7,7 +7,7 @@ const DashboardUsers: React.FC = () => {
     const { users, loading } = useUsers();
 
     return (
-        <div className="dashboard-users">
+        <div className="dashboard-users text-white">
             <h2>Dashboard Users</h2>
             <div className="users-container">
                 {loading ? (

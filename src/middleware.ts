@@ -2,26 +2,35 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 // Rutas que no requieren autenticación
-const publicRoutes = ['/', '/login', '/register']
+const publicRoutes = [
+    '/',
+    '/login',
+    '/register',
+    '/api/login',
+    '/api/register',
+    '/api/verify-token'
+]
 
 export async function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname
 
-    if (publicRoutes.includes(path)) {
+    // Permitir todas las rutas públicas y rutas de API
+    if (publicRoutes.includes(path) || path.startsWith('/api/')) {
         return NextResponse.next()
     }
 
-    const jwt = request.cookies.get('cine_token')?.value
-    console.log("jwt", jwt)
-
-    if (!jwt) {
-        return NextResponse.redirect(new URL('/', request.url))
+    // Verificar si la ruta es del dashboard
+    if (path.startsWith('/dashboard')) {
+        // Permitir que el contexto de autenticación maneje la protección
+        return NextResponse.next()
     }
+
+    return NextResponse.next()
 }
 
 export const config = {
     matcher: [
-        '/((?!api|_next/static|_next/image|favicon.ico).*)',
+        '/((?!_next/static|_next/image|favicon.ico).*)',
     ],
 }
 
