@@ -11,8 +11,12 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next()
     }
 
-    const jwt = request.cookies.get('cine_token')
+    const jwt = request.cookies.get('cine_token')?.value
     console.log("jwt", jwt)
+
+    if (!jwt) {
+        return NextResponse.redirect(new URL('/', request.url))
+    }
 }
 
 export const config = {
