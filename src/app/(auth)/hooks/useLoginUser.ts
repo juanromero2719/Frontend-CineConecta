@@ -12,16 +12,23 @@ export const useLoginUser = () => {
   const router = useRouter();
 
   const loginUser = async (email: string, password: string) => {
-    const userPayload: LoginRequest = { email, password };
-    const result = await callEndpoint({
-      call: loginAdapter.loginUser(userPayload),
-    });
+    try {
+      const userPayload: LoginRequest = { email, password };
+      const result = await callEndpoint({
+        call: loginAdapter.loginUser(userPayload),
+      });
 
-    setLoginData(result.data || null);
-    setIsAuthenticated(true);
-    router.push('/dashboard');
-
-    return result.data;
+      if (result.data) {
+        setLoginData(result.data);
+        setIsAuthenticated(true);
+        router.push('/dashboard');
+        return result.data;
+      }
+      throw new Error('No se recibieron datos del servidor');
+    } catch (error) {
+      console.error('Error en login:', error);
+      throw error;
+    }
   };
 
   return { loginUser, loading, loginData };
