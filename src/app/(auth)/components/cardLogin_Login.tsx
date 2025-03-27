@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
-import Input from '@/../components/input';
+import Input from '@/components/input';
 import { useLoginUser } from '@/app/(auth)/hooks/useLoginUser';
 
 const CardLogin: React.FC = () => {
-    
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loginUser, loading } = useLoginUser();
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await loginUser(email, password);
-      console.log('Login exitoso. Token recibido:', response.token);
-    } catch  {} };
+      await loginUser(email, password);
+    } catch { }
+  };
 
   return (
     <div className="bg-transparent px-8 py-2 max-w-md w-full">
@@ -30,7 +30,7 @@ const CardLogin: React.FC = () => {
             required
           />
         </div>
-        
+
         <div className="mb-6">
           <Input
             id="password"

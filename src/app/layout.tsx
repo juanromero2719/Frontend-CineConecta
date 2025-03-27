@@ -1,5 +1,5 @@
-// src/app/layout.tsx
 
+import { Providers } from '@/components/Providers';
 import './globals.css';
 import type { Metadata } from 'next';
 
@@ -12,7 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className='bg-ccDarkGray'>
       <body className="bg-ccDarkGray text-white">
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

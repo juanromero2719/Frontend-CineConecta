@@ -20,7 +20,7 @@ export default function Register() {
       <div className="bg-ccGray p-8 rounded-xl shadow-md w-full max-w-lg border border-ccLightGray">
 
         <div className="relative flex items-center justify-between px-4 py-1 bg-ccLightGray rounded-lg text-white">
-          
+
           <motion.div
             layout
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -33,18 +33,16 @@ export default function Register() {
 
           <button
             onClick={() => handleTabChange('login')}
-            className={`w-1/2 text-lg py-2 px-4 z-10 transition-colors duration-300 ${
-              activeTab === 'login' ? 'text-black ' : 'text-white'
-            }`}
+            className={`w-1/2 text-lg py-2 px-4 z-10 transition-colors duration-300 ${activeTab === 'login' ? 'text-black ' : 'text-white'
+              }`}
           >
             Iniciar sesión
           </button>
 
           <button
             onClick={() => handleTabChange('register')}
-            className={`w-1/2 text-lg py-2 px-4 z-10 transition-colors duration-300 ${
-              activeTab === 'register' ? 'text-black' : 'text-white'
-            }`}
+            className={`w-1/2 text-lg py-2 px-4 z-10 transition-colors duration-300 ${activeTab === 'register' ? 'text-black' : 'text-white'
+              }`}
           >
             Registrarse
           </button>
@@ -54,11 +52,7 @@ export default function Register() {
           {activeTab === 'login' ? (
             <CardLogin_Login />
           ) : (
-            <CardLogin_Register
-              onSubmit={(data: { name: string; email: string; password: string }) => {
-                console.log(data);
-              }}
-            />
+            <CardLogin_Register />
           )}
         </div>
 

@@ -1,10 +1,9 @@
-import '@/../interceptors/axiosInterceptor';
-import { axiosInstance } from '@/../services/axiosInstance';
+import '@/interceptors/axiosInterceptor';
+import { axiosInstance } from '@/services/axiosInstance';
 import { LoginRequest } from '@/app/(auth)/models/LoginRequest';
 import { AxiosResponse, AxiosError } from 'axios';
 
 export interface LoginResponse {
-  token: string;
   message?: string;
 }
 

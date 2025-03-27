@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file://E%3A/proyectos%20de%20programacion/Frontend-cineConecta/cineconecta/src/app/%28dashboard%29/dashboard/components/dashboardUsers.tsx"],"sourcesContent":["\r\n\r\n'use client';\r\n\r\nimport React from 'react';\r\nimport { useUsers } from '@/app/(dashboard)/dashboard/hooks/useUsers';\r\n\r\nconst DashboardUsers: React.FC = () => {\r\n\r\n    const { users, loading, error } = useUsers();\r\n\r\n    return (\r\n        <div className=\"dashboard-users\">\r\n            <h2>Dashboard Users</h2>\r\n            <div className=\"users-container\">\r\n                <p>User data will be displayed here</p>\r\n            </div>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default DashboardUsers;"],"names":[],"mappings":";;;;AAKA;;;AAHA;;AAKA,MAAM,iBAA2B;;IAE7B,MAAM,EAAE,KAAK,EAAE,OAAO,EAAE,KAAK,EAAE,GAAG,CAAA,GAAA,gKAAA,CAAA,WAAQ,AAAD;IAEzC,qBACI,6LAAC;QAAI,WAAU;;0BACX,6LAAC;0BAAG;;;;;;0BACJ,6LAAC;gBAAI,WAAU;0BACX,cAAA,6LAAC;8BAAE;;;;;;;;;;;;;;;;;AAInB;GAZM;;QAEgC,gKAAA,CAAA,WAAQ;;;KAFxC;uCAcS","debugId":null}}]
-}

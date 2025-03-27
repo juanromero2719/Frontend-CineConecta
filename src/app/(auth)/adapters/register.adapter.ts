@@ -1,5 +1,5 @@
-import '@/../interceptors/axiosInterceptor';
-import { axiosInstance } from '@/../services/axiosInstance';
+import '@/interceptors/axiosInterceptor';
+import { axiosInstance } from '@/services/axiosInstance';
 import { RegisterRequest } from '@/app/(auth)/models/RegisterRequest';
 import { AxiosResponse, AxiosError } from 'axios';
 
@@ -9,7 +9,7 @@ export interface RegisterResponse {
 
 export const RegisterAdapter = {
   async registerUser(payload: RegisterRequest): Promise<AxiosResponse<RegisterResponse>> {
-    
+
     try {
       return await axiosInstance.post('/register', payload);
     } catch (error: unknown) {
