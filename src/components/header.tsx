@@ -19,7 +19,7 @@ export default function Header() {
     };
 
     return (
-        <header className="bg-ccGray text-white py-4 px-6 shadow-md">
+        <header className=" text-white py-4 px-6 shadow-md">
             <div className="h-[5vh] container mx-auto flex items-center justify-between">
 
                 <Link href={isAuthenticated ? '/dashboard' : '/'} className="flex items-center gap-2">
