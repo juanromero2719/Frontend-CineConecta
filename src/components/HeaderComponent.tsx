@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Logo from '@/components/Logo'
+import Logo from '@/components/shared/LogoCineConecta'
 import { useAuth } from '@/contexts/AuthContext';
 import { useLogout } from '@/hooks/useLogout';
 

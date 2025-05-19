@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Input from '@/components/ui/input';
 import { useRegisterUser } from '@/app/(auth)/register/hooks/useRegisterUser';
 import { showSuccess } from '@/utilities/notifications';
-import Logo from '@/components/Logo';
+import Logo from '@/components/shared/LogoCineConecta';
 import Link from 'next/link';
 
 const CardRegister: React.FC = () => {

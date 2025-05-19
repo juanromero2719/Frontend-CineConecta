@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Input from '@/components/ui/input';
 import { useLoginUser } from '@/app/(auth)/hooks/useLoginUser';
-import Logo from '@/components/Logo'
+import Logo from '@/components/shared/LogoCineConecta';
 import Link from 'next/link';
 
 const CardLogin: React.FC = () => {
