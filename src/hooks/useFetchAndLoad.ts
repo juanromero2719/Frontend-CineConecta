@@ -40,7 +40,7 @@ export default function useFetchAndLoad(): UseFetchAndLoadReturn {
       setLoading(false);
       setController(null);
     }
-  }, []); // No dependencias para evitar recreación
+  }, [controller]); 
 
   const cancelEndpoint = useCallback(() => {
     if (controller) {

@@ -20,9 +20,7 @@ export const loginAdapter = {
       });
 
       if (response.data?.token) {
-        // Asegurarnos de que la cookie se establezca antes de continuar
         setCookie('cine_token', response.data.token, 1);
-        // Pequeña pausa para asegurar que la cookie se establezca
         await new Promise(resolve => setTimeout(resolve, 100));
       }
 

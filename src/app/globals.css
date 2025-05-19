@@ -63,3 +63,11 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 input[type="password"]::-webkit-textfield-decoration-container {
   display: none !important;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

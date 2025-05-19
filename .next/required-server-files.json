@@ -14,7 +14,7 @@
     "cleanDistDir": true,
     "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
-    "configOrigin": "next.config.ts",
+    "configOrigin": "next.config.js",
     "useFileSystemPublicRoutes": true,
     "generateEtags": true,
     "pageExtensions": [
@@ -49,7 +49,9 @@
       "path": "/_next/image",
       "loader": "default",
       "loaderFile": "",
-      "domains": [],
+      "domains": [
+        "zufjxpgxyhphoygtxqit.supabase.co"
+      ],
       "disableStaticImages": false,
       "minimumCacheTTL": 60,
       "formats": [
@@ -280,7 +282,7 @@
     },
     "htmlLimitedBots": "Mediapartners-Google|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview",
     "bundlePagesRouterDependencies": false,
-    "configFileName": "next.config.ts"
+    "configFileName": "next.config.js"
   },
   "appDir": "E:\\proyectos de programacion\\Frontend-cineConecta\\cineconecta",
   "relativeAppDir": "",

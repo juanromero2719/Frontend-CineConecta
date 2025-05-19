@@ -1,9 +1,17 @@
-const Logo: React.FC = () => {
-    return (
-        <div className="bg-transparent flex items-center justify-center ">
-            <img src="/images/logo.svg" alt="Logo CineConecta" width={300} height={300} />
-        </div>
-    );
+import React from 'react';
+import Image from 'next/image';
+
+interface LogoProps {
+  width?: number;
+  height?: number;
+}
+
+const Logo: React.FC<LogoProps> = ({ width = 300, height = 300 }) => {
+  return (
+    <div className="bg-transparent flex items-center justify-center">
+      <Image src="/images/logo.png" alt="Logo CineConecta" width={width} height={height} />
+    </div>
+  );
 };
 
 export default Logo;
