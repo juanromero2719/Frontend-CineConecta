@@ -2,6 +2,7 @@ import { useGenres } from '@/app/(dashboard)/dashboard/hooks/useGenres';
 import React, { useState, useMemo } from 'react';
 import { useFilterByGenres } from '../hooks/useFilterByGenres';
 import { Movie } from '../models/movies.models';
+import Link from 'next/link';
 
 const BestMoviesMonth: React.FC = () => {
     // Generos
@@ -41,7 +42,9 @@ const BestMoviesMonth: React.FC = () => {
                         filteredData.results.slice(0, 5).map((movie: Movie, index: number) => (
                             <li key={movie.id} className="flex items-start gap-2 px-6 space-y-4 text-md">
                                 <span className="font-bold text-[#c07b3e] text-2xl">{index + 1}</span>
-                                <span className="text-[rgb(var(--gray))] text-2xl">{movie.title}</span>
+                                <Link href={`/movie/${movie.title}`} className='hover:underline'>
+                                    <span className="text-[rgb(var(--gray))] text-2xl">{movie.title}</span>
+                                </Link>
                             </li>
                         ))
                     ) : !loadingFiltered && (

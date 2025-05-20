@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useTopRated } from '../hooks/useTopRated';
 import { MovieTopRated } from '../models/top-rated.models';
+import Link from 'next/link';
 
 const FeaturedFilms: React.FC = () => {
     const { data, loading, error } = useTopRated();
@@ -36,6 +37,7 @@ const FeaturedFilms: React.FC = () => {
                     {/* Flecha izquierda SVG */}
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c07b3e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
                 </button>
+
                 <div className="flex items-center gap-4 rounded-2xl p-2">
                     <Image
                         src={movie.poster_url}
@@ -45,7 +47,9 @@ const FeaturedFilms: React.FC = () => {
                         className="w-64 h-96 object-cover rounded-2xl shadow-md"
                     />
                     <div>
-                        <h3 className="text-2xl text-center font-bold text-[rgb(var(--gray))]">{movie.title}</h3>
+                    <Link href={`/movie/${movie.title}`}>
+                            <h3 className="text-2xl text-center font-bold text-[rgb(var(--gray))] hover:underline cursor-pointer">{movie.title}</h3>
+                            </Link>
                         <div className="flex items-center justify-center mt-1 text-yellow-600 text-4xl text-center">
                             {Array.from({ length: 5 }).map((_, i) => (
                                 <span key={i}>{i < Math.round(average_score) ? '★' : '☆'}</span>
