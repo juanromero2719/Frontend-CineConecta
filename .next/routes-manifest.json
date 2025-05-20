@@ -13,7 +13,16 @@
     }
   ],
   "headers": [],
-  "dynamicRoutes": [],
+  "dynamicRoutes": [
+    {
+      "page": "/movie/[title]",
+      "regex": "^/movie/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtitle": "nxtPtitle"
+      },
+      "namedRegex": "^/movie/(?<nxtPtitle>[^/]+?)(?:/)?$"
+    }
+  ],
   "staticRoutes": [
     {
       "page": "/",

@@ -9,7 +9,7 @@ interface Filters {
 
 export function useFilterByGenres(filters: Filters) {
   const [data, setData] = useState<MoviesFilterByGenresResponse | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { Movie } from '@/app/(dashboard)/dashboard/models/movies.models';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface MovieCarouselProps {
   title: string;
@@ -97,7 +98,9 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
                   <p className="font-semibold text-[#ba7c3a]">
                     {movie.rating.toFixed(1)}
                   </p>
-                  <p className="text-sm font-bold text-gray-800 ">{movie.title}</p>
+                  <Link href={`/movie/${movie.title}`} className='hover:underline'>
+                    <p className="text-sm font-bold text-[rgb(var(--gray))] hover:underline ">{movie.title}</p>
+                  </Link>
                 </div>
               </div>
             );

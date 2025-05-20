@@ -33,24 +33,24 @@ export default function Header() {
             {isAuthenticated ? (
               <>
                 <li>
-                  <button className="text-xl text-gray-800 transition hover:underline">
+                  <button className="text-xl text-[rgb(var(--gray))] transition hover:underline ">
                     Inicio
                   </button>
                 </li>
                 <li>
-                  <button className="text-xl text-gray-800 transition hover:underline">
+                  <button className="text-xl text-[rgb(var(--gray))] transition hover:underline">
                     Películas
                   </button>
                 </li>
                 <li>
-                  <button className="text-xl text-gray-800 transition hover:underline">
+                  <button className="text-xl text-[rgb(var(--gray))] transition hover:underline">
                     Recomendaciones
                   </button>
                 </li>
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="text-xl text-gray-800 transition hover:underline"
+                    className="text-xl text-[rgb(var(--gray))] transition hover:underline"
                   >
                     Logout
                   </button>
