@@ -91,7 +91,7 @@ const HomePage: React.FC = () => {
         </div>
 
         {/* Derecha: Mejores calificadas → 1/3 */}
-        <div className="basis-1/3 flex justify-center items-start">
+        <div className="basis-1/3 flex justify-center items-start mt-30">
           <BestMoviesMonth/>
         </div>
 

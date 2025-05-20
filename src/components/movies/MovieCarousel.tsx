@@ -60,7 +60,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
 
   return (
     <div className="w-full">
-      <h2 className="mb-4 text-center text-xl font-bold text-gray-800">{title}</h2>
+      <h2 className="mb-4 text-center text-3xl font-bold text-[rgb(var(--gray))]">{title}</h2>
 
       <div className="relative">
 
@@ -97,7 +97,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
                   <p className="font-semibold text-[#ba7c3a]">
                     {movie.rating.toFixed(1)}
                   </p>
-                  <p className="text-sm font-bold text-gray-800">{movie.title}</p>
+                  <p className="text-sm font-bold text-gray-800 ">{movie.title}</p>
                 </div>
               </div>
             );

@@ -18,6 +18,10 @@ body {
   --latte: 233, 216, 198, 255;
   --light-latte: 248, 245, 240, 255;
   --dark-latte: 161, 117, 63, 255;
+  --latte-light: 245, 239, 232;
+
+  --gray: 98, 97, 92;
+  
 }
 
 /* Estilos para SweetAlert2 */
