@@ -9,9 +9,9 @@ export default function MovieLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-h-screen bg-[rgba(var(--latte-light))]">
+    <div className="flex flex-col min-h-screen ">
       <Header />
-      <main className="flex flex-col items-center justify-center px-4 py-6">
+      <main className="flex flex-col items-center justify-center py-0">
         {children}
       </main>
     </div>
