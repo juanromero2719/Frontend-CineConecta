@@ -20,7 +20,11 @@ body {
   --dark-latte: 161, 117, 63, 255;
   --latte-light: 245, 239, 232;
 
-  --gray: 98, 97, 92;
+  --dark-blue-100:5, 10, 26, 255;
+  --dark-blue-80:19, 26, 44, 255;
+  --dark-blue-60:33, 45, 62, 255;
+  --sky-blue: 8, 132, 198, 255;
+
   
 }
 
@@ -74,4 +78,11 @@ input[type="password"]::-webkit-textfield-decoration-container {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.bg-noise {
+   /* ruido fractal SVG — ¡todo en UNA sola línea! */
+   background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='120'%20viewBox='0%200%20120%20120'%3E%3Cfilter%20id='noiseFilter'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.7'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA%20type='discrete'%20tableValues='0%200.02'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect%20width='120'%20height='120'%20filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+   background-size: 320px 320px;   /* patrón + grande = grano + fino */
+   background-repeat: repeat;
 }

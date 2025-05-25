@@ -9,7 +9,7 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ width = 300, height = 300 }) => {
   return (
     <div className="bg-transparent flex items-center justify-center">
-      <Image src="/images/logo.png" alt="Logo CineConecta" width={width} height={height} />
+      <Image src="/images/LogoModerno.png" alt="Logo CineConecta" width={width} height={height} />
     </div>
   );
 };

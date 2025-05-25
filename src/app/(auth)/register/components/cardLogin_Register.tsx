@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Input from '@/components/ui/input';
+import Input from '@/components/ui/mbInput';
 import { useRegisterUser } from '@/app/(auth)/register/hooks/useRegisterUser';
 import { showSuccess } from '@/utilities/notifications';
 import Logo from '@/components/shared/LogoCineConecta';

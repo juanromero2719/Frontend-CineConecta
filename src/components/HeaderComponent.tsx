@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Logo from '@/components/shared/LogoCineConecta'
 import { useAuth } from '@/contexts/AuthContext';
 import { useLogout } from '@/hooks/useLogout';
+import { LoginButton } from './auth/LoginButton';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
@@ -16,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-white shadow-md">
+    <header className="w-full bg-[rgb(var(--dark-blue-100))] shadow-md bg-noise ">
       {/* nada de altura fija, solo px para los costados */}
       <div className="flex w-full items-center justify-between px-6">
         {/* Logo */}
@@ -57,13 +58,8 @@ export default function Header() {
                 </li>
               </>
             ) : (
-              <li>
-                <Link
-                  href="/"
-                  className="text-xl text-gray-800 transition hover:text-slate-500"
-                >
-                  Login
-                </Link>
+              <li className='py-3'>
+                <LoginButton />
               </li>
             )}
           </ul>
