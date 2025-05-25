@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Input from '@/components/ui/mbInput';
 import { useRegisterUser } from '@/app/(auth)/register/hooks/useRegisterUser';
 import { showSuccess } from '@/utilities/notifications';
-import Logo from '@/components/shared/LogoCineConecta';
 import Link from 'next/link';
+import { MbButton } from '@/components/ui/mbButton';
 
 const CardRegister: React.FC = () => {
   const { registerUser, loading } = useRegisterUser();
@@ -47,17 +47,25 @@ const CardRegister: React.FC = () => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row bg-white w-[90vw] md:w-[80vw] lg:w-[70vw] 2xl:w-[50vw] h-auto md:h-[500px] rounded-2xl min-w-[300px] overflow-hidden">
+    <section
+    className="
+      flex flex-col bg-[rgba(var(--dark-blue-60))] bg-noise
+      w-[95vw] xs:w-[90vw] md:w-[70vw] lg:w-[45vw] xl:w-[36vw] 2xl:w-[30vw]
+      max-w-[540px] min-w-[300px] rounded-lg overflow-hidden
+      px-4 sm:px-8 py-10 mx-auto mt-16 mb-12
+    "
+  >
+    <form onSubmit={handleSubmit} className="w-full">
+      {/* --- encabezados --- */}
+      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white text-center mb-2">
+        Crear una cuenta
+      </h3>
+      <h2 className="text-sm md:text-base lg:text-lg text-gray-400 text-center mb-8">
+        Únete a la comunidad de CineConecta
+      </h2>
 
-      {/* Lado izquierdo con Formulario */}
-      <div className="w-full md:w-[60%] flex justify-center items-center py-8 px-6">
-        <form onSubmit={handleSubmit} className="w-full md:w-[80%]">
-          <h3 className="text-2xl font-bold mb-6 text-gray-700">
-            Configurar tu cuenta
-          </h3>
-
-          {/* NOMBRE */}
-          <div className="mb-4">
+      {/* NOMBRE */}
+      <div className="mb-4">
             <Input
               id="name"
               type="text"
@@ -95,49 +103,42 @@ const CardRegister: React.FC = () => {
             />
           </div>
 
-          {/* CHECKBOX TÉRMINOS */}
-          <div className="mb-6 flex items-center space-x-2 text-sm text-gray-600">
-            <input
-              id="terms"
-              name="termsAccepted"
-              type="checkbox"
-              checked={formData.termsAccepted}
-              onChange={handleChange}
-              className="cursor-pointer"
-            />
-            <label htmlFor="terms" className="cursor-pointer">
-              Declaro que he leído y acepto los{' '}
-              <span className="underline">Términos de servicio</span>
-            </label>
-          </div>
 
-          {/* BOTÓN REGISTRARSE */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full text-lg bg-[rgba(var(--dark-latte))] text-white py-2 px-4 rounded-md hover:bg-[rgba(var(--latte))] outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mb-4 transition-colors"
-          >
-            {loading ? 'Cargando...' : 'Registrarse'}
-          </button>
+      {/* --- submit --- */}
+      <button
+        type="submit"
+        disabled={loading}
+        className="
+          w-full text-lg md:text-xl bg-[rgba(var(--sky-blue))]
+          text-white py-3 rounded-md hover:underline transition
+          disabled:opacity-60 disabled:cursor-not-allowed mb-6 mt-6
+        "
+      >
+        {loading ? 'Cargando…' : 'Registrarse'}
+      </button>
 
-          {/* LINK INICIA SESIÓN */}
-          <div className="text-center text-black text-sm">
-            ¿Ya tienes una cuenta?{' '}
-            <Link
-              href="/"
-              className="text-[rgba(var(--dark-latte))] font-semibold hover:underline hover:text-[rgba(var(--latte))] transition-colors"
-            >
-              Inicia sesión
-            </Link>
-          </div>
-        </form>
+      {/* --- registro --- */}
+      <p className="text-center text-gray-400 text-sm md:text-lg mb-8">
+        ¿Ya tienes una cuenta?{' '}
+        <Link href="/" className="text-[rgba(var(--sky-blue))] hover:underline">
+          Inicia sesión
+        </Link>
+      </p>
+
+      {/* --- divisor --- */}
+      <div className="flex items-center gap-3 text-gray-400 text-sm md:text-base mb-6">
+        <hr className="flex-grow border-t border-white/20" />
+        <span>O continúa con</span>
+        <hr className="flex-grow border-t border-white/20" />
       </div>
 
-      {/* Lado derecho con Logo */}
-      <div className="w-full md:w-[40%] h-[200px] md:h-auto bg-[rgba(var(--light-latte))] flex justify-center items-center">
-        <Logo />
+      {/* --- botones sociales --- */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <MbButton text="Google"   iconSrc="/images/google.webp"   />
+        <MbButton text="Facebook" iconSrc="/images/facebook.png" />
       </div>
-    </section>
+    </form>
+  </section>
   );
 };
 
