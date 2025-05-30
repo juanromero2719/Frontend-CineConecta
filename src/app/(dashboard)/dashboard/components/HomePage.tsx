@@ -1,12 +1,10 @@
 'use client';
 
 import React from 'react';
-import MessageWelcome from '@/app/(dashboard)/dashboard/components/MessageWelcome';
-import FeaturedFilms from '@/app/(dashboard)/dashboard/components/FeaturedFilms';
-import BestMoviesMonth from '@/app/(dashboard)/dashboard/components/BestMoviesMonth';
 import MovieCarousel from '@/components/movies/MovieCarousel';
 import { useRecentMovies } from '../hooks/useRecentMovies';
-
+import { BannerHomePage } from './BannerHomePage';  
+import WhyChooseCineConecta from './WhyChooseCineConecta';
 // import { useUsers } from '@/app/(dashboard)/dashboard/hooks/useUser';
 
 const HomePage: React.FC = () => {
@@ -82,25 +80,27 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row gap-8 px-6 py-8 min-h-screen text-[#3d3d3d]">
-        
+      <BannerHomePage/>
+      <WhyChooseCineConecta/>
+      
+      <div className="flex flex-col md:flex-row gap-8 px-6 py-8 text-[#3d3d3d]"></div>
+
+      <div className='space-y-20 mb-20'>
+        <MovieCarousel title="🏹 Películas en tendencia" subtitle="Las películas más populares en este momento" movies={recentMovies?.results || []} loading={loadingRecentMovies} error={error} />
+        <MovieCarousel title="🆕 Últimas incorporaciones" subtitle="Nuevas películas mas recientes en nuestra plataforma" movies={moviesData} loading={loadingRecentMovies} error={error}/>
+      </div>
+  
         {/* Izquierda: Bienvenida y destacados → 2/3 */}
-        <div className="basis-2/3">
+        {/* <div className="basis-2/3">
           <MessageWelcome/>
           <FeaturedFilms/>
-        </div>
+        </div> */}
 
         {/* Derecha: Mejores calificadas → 1/3 */}
-        <div className="basis-1/3 flex justify-center items-start mt-30">
+        {/* <div className="basis-1/3 flex justify-center items-start mt-30">
           <BestMoviesMonth/>
-        </div>
-
-        
-      </div>
-      <div className='space-y-20'>
-        <MovieCarousel title="Películas Nuevas" movies={recentMovies?.results || []} loading={loadingRecentMovies} error={error} />
-        <MovieCarousel title="Recomendaciones para ti" movies={moviesData} loading={loadingRecentMovies} error={error}/>
-      </div>
+        </div> */}
+    
     </>
     
 

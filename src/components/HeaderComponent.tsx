@@ -4,66 +4,57 @@ import React from 'react';
 import Link from 'next/link';
 import Logo from '@/components/shared/LogoCineConecta'
 import { useAuth } from '@/contexts/AuthContext';
-import { useLogout } from '@/hooks/useLogout';
-import { LoginButton } from './auth/LoginButton';
+import { LogoutButton } from './auth/LogoutButton';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
-  const { logout } = useLogout();
-
-  const handleLogout = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await logout().catch(console.error);
-  };
 
   return (
-    <header className="w-full bg-[rgb(var(--dark-blue-100))] shadow-md bg-noise ">
-      {/* nada de altura fija, solo px para los costados */}
-      <div className="flex w-full items-center justify-between px-6">
+    <header className="w-full mt-2">
+      <div className="flex flex-col md:flex-row w-full items-center justify-between px-4 md:px-6 gap-4 md:gap-0">
         {/* Logo */}
-        <Link
-          href={isAuthenticated ? '/dashboard' : '/'}
-          className="flex items-center gap-2 py-2"
-        >
-          <Logo  width={200}/>
-        </Link>
+        <div className="flex justify-center w-full md:w-auto">
+          <Link
+            href={isAuthenticated ? '/dashboard' : '/'}
+            className="flex items-center gap-2 py-2"
+          >
+            <Logo width={160} />
+          </Link>
+        </div>
 
-        {/* Navegación */}
-        <nav>
-          <ul className="flex items-center space-x-6">
-            {isAuthenticated ? (
-              <>
-                <li>
-                  <button className="text-xl text-[rgb(var(--gray))] transition hover:underline ">
-                    Inicio
-                  </button>
-                </li>
-                <li>
-                  <button className="text-xl text-[rgb(var(--gray))] transition hover:underline">
-                    Películas
-                  </button>
-                </li>
-                <li>
-                  <button className="text-xl text-[rgb(var(--gray))] transition hover:underline">
-                    Recomendaciones
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={handleLogout}
-                    className="text-xl text-[rgb(var(--gray))] transition hover:underline"
-                  >
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
-              <li className='py-3'>
-                <LoginButton />
-              </li>
-            )}
-          </ul>
-        </nav>
+        {/* Navegación principal */}
+        {isAuthenticated ? (
+          <nav className="w-full md:w-auto flex justify-center">
+            <ul className="flex flex-col md:flex-row items-center gap-2 md:gap-8">
+              <li>
+              <button className="text-base md:text-lg text-[rgb(var(--gray))] transition hover:text-[rgb(var(--sky-blue))] ">
+                Inicio
+              </button>
+            </li>
+            <li>
+              <button className="text-base md:text-lg text-[rgb(var(--gray))] transition hover:text-[rgb(var(--sky-blue))]">
+                Películas
+              </button>
+            </li>
+            <li>
+              <button className="text-base md:text-lg text-[rgb(var(--gray))] transition hover:text-[rgb(var(--sky-blue))]">
+                Recomendaciones
+              </button>
+            </li>
+            </ul>
+          </nav>
+        ) : (
+          <></>
+        )}
+
+        {/* Botón login/logout */}
+        <div className="flex justify-center w-full md:w-auto">
+          {isAuthenticated ? (
+            <LogoutButton />
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </header>
   );

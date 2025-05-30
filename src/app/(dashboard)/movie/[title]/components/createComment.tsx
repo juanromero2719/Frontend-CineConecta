@@ -1,82 +1,118 @@
-import { FaUserCircle, FaStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 import { useState } from 'react';
 import { useCreateComment } from '../hooks/useCreateComment';
 
-interface CreateCommentProps {
-    isOpen: boolean;
-    onClose: () => void;
-    userName?: string;
-    movieName?: string; // Cambiado de movieId a movieName
+interface Review {
+  user: string;
+  date: string;
+  rating: number;
+  comment: string;
+  likes: number;
 }
 
-export default function CreateComment({ isOpen, onClose, userName = 'Yarlinson Barranco', movieName }: CreateCommentProps) {
-    const [rating, setRating] = useState(4);
-    const [hover, setHover] = useState<number | null>(null);
-    const [comment, setComment] = useState('');
-    const { createComment, loading } = useCreateComment();
-    const [, setSuccess] = useState(false);
+interface CreateCommentProps {
+  isOpen: boolean;
+  onClose: () => void;
+  userName?: string;
+  movieName?: string;
+  reviews?: Review[]; // Lista de reseñas
+}
 
-    if (!isOpen) return null;
+export default function CreateComment({
+  isOpen,
+  onClose,
+  movieName,
+  reviews = [
+    {
+      user: 'JuanPerez',
+      date: '29 de julio de 2023',
+      rating: 3.5,
+      comment:
+        'Una película sorprendentemente inteligente y con más profundidad de lo que esperaba. Gerwig utiliza el icono de Barbie para explorar temas feministas y existenciales de forma accesible y divertida.',
+      likes: 84,
+    },
+  ],
+}: CreateCommentProps) {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState<number | null>(null);
+  const [comment, setComment] = useState('');
+  const { createComment, loading } = useCreateComment();
+  const [, setSuccess] = useState(false);
 
-    const handleSend = async () => {
-        await createComment({
-            movie_name: movieName || '',
-            content: comment,
-        });
-        setSuccess(true);
-        setComment('');
-        setRating(4);
-        setTimeout(() => {
-            setSuccess(false);
-            onClose();
-        }, 1200);
-    };
+  if (!isOpen) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/30 backdrop-blur-sm bg-opacity-40">
-            <div className="bg-[#f8f6f4] rounded-2xl p-8 w-[400px] shadow-lg relative">
-                {/* Botón cerrar */}
-                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold">×</button>
-                <h1 className="text-2xl font-bold text-[rgba(var(--gray))] mb-4">Reseñas</h1>
-                <div className="flex items-center gap-4 mb-2">
-                    <FaUserCircle className="text-4xl text-black/60" />
-                    <span className="font-bold text-[#a06a2b] text-lg">{userName}</span>
-                </div>
-                <div className="flex items-center gap-2 mb-4">
-                    {/* Estrellas seleccionables */}
-                    {Array.from({ length: 5 }).map((_, i) => (
-                        <FaStar
-                            key={i}
-                            className={
-                                (hover !== null ? i < hover : i < rating)
-                                    ? 'text-[#a06a2b] text-2xl cursor-pointer'
-                                    : 'text-gray-300 text-2xl cursor-pointer'
-                            }
-                            onMouseEnter={() => setHover(i + 1)}
-                            onMouseLeave={() => setHover(null)}
-                            onClick={() => setRating(i + 1)}
-                        />
-                    ))}
-                    <span className="ml-2 bg-[#f8f6f4] border border-[#a06a2b] text-[#a06a2b] font-bold rounded-full px-4 py-1 text-md">{rating.toFixed(1)}</span>
-                </div>
-                <textarea
-                    className="w-full h-24 rounded-xl border-2 border-[#a06a2b] p-3 mb-4 text-[rgba(var(--gray))] font-semibold focus:outline-none resize-none bg-[#f8f6f4]"
-                    placeholder="Escribe tu comentario ..."
-                    value={comment}
-                    onChange={e => setComment(e.target.value)}
-                    disabled={loading}
-                />
+  const handleSend = async () => {
+    await createComment({
+      movie_name: movieName || '',
+      content: comment,
+    });
+    setSuccess(true);
+    setComment('');
+    setRating(0);
+    setTimeout(() => {
+      setSuccess(false);
+      onClose();
+    }, 1200);
+  };
 
-                <button
-                    className="w-full bg-[#a06a2b] text-white font-bold py-2 rounded-xl text-lg hover:bg-[#8a531a] transition disabled:opacity-60"
-                    onClick={handleSend}
-                    disabled={loading || !comment.trim()}
-                >
-                    {loading ? 'Enviando...' : 'Enviar'}
-                </button>
-            </div>
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div className="bg-[rgb(var(--dark-blue-60))] rounded-2xl p-6 w-full max-w-2xl shadow-xl border border-white/10 bg-noise relative">
+        {/* Botón cerrar */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white/70 hover:text-white text-2xl font-bold focus:outline-none"
+          aria-label="Cerrar"
+        >
+          ×
+        </button>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-xl font-bold text-white">Reseñas</h1>
+          <span className="bg-white/10 text-white text-xs px-3 py-1 rounded-lg mr-6">{reviews.length} reseña</span>
         </div>
-    );
+
+        {/* Deja tu opinión */}
+        <div className="mb-2">
+          <h2 className="text-base font-semibold text-white mb-2">Deja tu opinión</h2>
+          <div className="flex flex-col justify-start items-start gap-2 mb-2">
+            <span className="text-white text-sm">Tu calificación</span>
+            <div className="flex items-center">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <FaStar
+                  key={i}
+                  className={
+                    (hover !== null ? i < hover : i < rating)
+                      ? 'text-yellow-400 text-xl cursor-pointer'
+                      : 'text-gray-500 text-xl cursor-pointer'
+                  }
+                  onMouseEnter={() => setHover(i + 1)}
+                  onMouseLeave={() => setHover(null)}
+                  onClick={() => setRating(i + 1)}
+                />
+              ))}
+            </div>
+          </div>
+          <textarea
+            className="w-full h-20 rounded-lg border border-white/10 text-white p-3 mb-3 resize-none focus:outline-none bg-noise bg-[rgb(var(--dark-blue-60))]"
+            placeholder="Comparte tus pensamientos sobre esta película..."
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+            disabled={loading}
+          />
+          <button
+            className="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-5 py-2 rounded-md transition disabled:opacity-60"
+            onClick={handleSend}
+            disabled={loading || !comment.trim()}
+          >
+            Publicar Reseña
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  );
 }
 
     

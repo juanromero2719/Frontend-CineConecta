@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Header from '@/components/HeaderComponent';
 
 export default function MovieLayout({
   children,
@@ -10,7 +9,6 @@ export default function MovieLayout({
 }) {
   return (
     <div className="flex flex-col min-h-screen ">
-      <Header />
       <main className="flex flex-col items-center justify-center py-0">
         {children}
       </main>
