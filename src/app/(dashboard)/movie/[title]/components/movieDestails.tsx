@@ -6,6 +6,14 @@ import { filterByGenres } from '@/app/(dashboard)/dashboard/adapters/filterByGen
 import Link from 'next/link';
 import CreateComment from './createComment';
 
+interface MovieExtra extends Movie {
+  saga?: string;
+  votes?: number;
+  budget?: number;
+  revenue?: number;
+  status?: string;
+}
+
 export default function MovieDetails() {
   const { title } = useParams<{ title: string }>();
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -43,12 +51,14 @@ export default function MovieDetails() {
     );
   }
 
+  const movieExtra = movie as MovieExtra;
+
   return (
     <div className="flex flex-col gap-6">
       {/* Tarjeta principal */}
       <div className="bg-[rgb(var(--dark-blue-60))] bg-noise rounded-2xl shadow-lg p-6 flex flex-col md:flex-row gap-8 border border-white/10">
         {/* Poster */}
-        <div className="flex-shrink-0 flex justify-center items-start">
+        <div className="flex-shrink-0 flex justify-center items-end">
           <Image
             src={movie.poster_url || '/images/default-movie.png'}
             alt={movie.title || ''}
@@ -60,7 +70,7 @@ export default function MovieDetails() {
         {/* Info principal */}
         <div className="flex-1 flex flex-col gap-2">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-1">{movie.title || ''}</h2>
-          <p className="italic text-white/80 mb-2">{(movie as any).saga || 'La saga continúa'}</p>
+          <p className="italic text-white/80 mb-2">{movieExtra.saga || 'La saga continúa'}</p>
           <div className="flex flex-wrap gap-2 mb-2">
             {movie.genre?.split(',').map((g: string) => (
               <span key={g} className="bg-white/10 text-white px-3 py-1 rounded-full text-sm font-semibold">{g.trim()}</span>
@@ -73,7 +83,7 @@ export default function MovieDetails() {
                 <span key={i}>{i < Math.round(movie.rating || 0) ? '★' : '☆'}</span>
               ))}
             </span>
-            <span className="text-white/80 text-sm">{movie.rating?.toFixed(1) || ''} {(movie as any).votes ? `(${(movie as any).votes})` : ''}</span>
+            <span className="text-white/80 text-sm">{movie.rating?.toFixed(1) || ''} {movieExtra.votes ? `(${movieExtra.votes})` : ''}</span>
           </div>
           <div className="flex gap-2 mb-2">
             <button className="bg-sky-500 hover:bg-sky-600 text-white px-4 py-1 rounded font-semibold text-sm">Añadir a Lista</button>
@@ -96,9 +106,9 @@ export default function MovieDetails() {
           <div className="text-white/80 text-sm space-y-1">
             <div><span className="font-semibold">Director:</span> {movie.director || ''}</div>
             <div><span className="font-semibold">Fecha de estreno:</span> {movie.release_date ? new Date(movie.release_date).toLocaleDateString() : ''}</div>
-            <div><span className="font-semibold">Presupuesto:</span> ${(movie as any).budget || 'N/A'}</div>
-            <div><span className="font-semibold">Recaudación:</span> ${(movie as any).revenue || 'N/A'}</div>
-            <div><span className="font-semibold">Estado:</span> {(movie as any).status || ''}</div>
+            <div><span className="font-semibold">Presupuesto:</span> ${movieExtra.budget || 'N/A'}</div>
+            <div><span className="font-semibold">Recaudación:</span> ${movieExtra.revenue || 'N/A'}</div>
+            <div><span className="font-semibold">Estado:</span> {movieExtra.status || ''}</div>
           </div>
         </div>
       </div>

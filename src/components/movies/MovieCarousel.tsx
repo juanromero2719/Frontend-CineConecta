@@ -125,7 +125,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
                   </div>
                   {/* Géneros */}
                   <div className="flex flex-wrap gap-2 mt-2">
-                    {movie.genres?.slice(0, 2).map((genre: any, idx: any) => (
+                    {movie.genres?.slice(0, 2).map((genre: string, idx: number) => (
                       <span key={idx} className="bg-[#1a2230] text-white/80 text-xs px-2 py-1 rounded-md">
                         {genre}
                       </span>
