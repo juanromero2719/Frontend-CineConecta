@@ -58,27 +58,27 @@ export const MovieDescription = () => {
                 <Header />
             </div>
 
-            <div className="bg-noise p-6 flex flex-col md:flex-row gap-8 z-20 border border-red-900 min-h-[400px] ">
+            <div className="bg-noise p-6 flex flex-col md:flex-row gap-8 z-20 min-h-[400px] w-full md:absolute md:bottom-0 md:left-0 md:right-0">
                 {/* Poster */}
-                <div className="flex-shrink-0 flex justify-center h-full self-end">
+                <div className="flex-shrink-0 flex justify-center items-center md:items-end h-full">
                     <Image
                         src={movie.poster_url || '/images/default-movie.png'}
                         alt={movie.title || ''}
                         width={400}
                         height={600}
-                        className="rounded-xl object-cover shadow-md w-[180px] h-[260px] md:min-w-[300px] md:w-[20vw] md:h-[50vh]"
+                        className="rounded-xl object-cover shadow-md w-[140px] h-[200px] sm:w-[160px] sm:h-[230px] md:min-w-[300px] md:w-[20vw] md:h-[50vh]"
                     />
                 </div>
                 {/* Info principal */}
-                <div className="flex-1 flex flex-col gap-2">
+                <div className="flex-1 flex flex-col gap-4 mt-4 text-center md:mt-0 md:text-left w-full max-w-[95vw] px-3">
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-1">{movie.title || ''}</h2>
                 <p className="italic text-white/80 mb-2">{movieExtra.saga || 'La saga continúa'}</p>
-                <div className="flex flex-wrap gap-2 mb-2">
+                <div className="flex flex-wrap gap-2 mb-2 justify-center md:justify-start">
                     {movie.genre?.split(',').map((g: string) => (
                     <span key={g} className="bg-white/10 text-white px-3 py-1 rounded-full text-sm font-semibold">{g.trim()}</span>
                     ))}
                 </div>
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex flex-wrap items-center gap-3 mb-2 justify-center md:justify-start">
                     <span className="text-white/80 text-sm">{movie.release_date ? new Date(movie.release_date).getFullYear() : ''}</span>
                     <span className="text-yellow-400 text-lg">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -87,7 +87,7 @@ export const MovieDescription = () => {
                     </span>
                     <span className="text-white/80 text-sm">{movie.rating?.toFixed(1) || ''} {movieExtra.votes ? `(${movieExtra.votes})` : ''}</span>
                 </div>
-                <div className="flex gap-2 mb-2">
+                <div className="flex gap-2 mb-2 justify-center md:justify-start flex-wrap">
                     <button className="bg-sky-500 hover:bg-sky-600 text-white px-4 py-1 rounded font-semibold text-sm">Añadir a Lista</button>
                     <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm">Favorito</button>
                     <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm">Compartir</button>
