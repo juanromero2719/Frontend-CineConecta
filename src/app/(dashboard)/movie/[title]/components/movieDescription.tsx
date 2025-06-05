@@ -3,7 +3,8 @@ import Header from "@/components/HeaderComponent";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Movie } from "@/app/(dashboard)/dashboard/models/movies.models";
-import { filterByGenres } from "@/app/(dashboard)/dashboard/adapters/filterByGenres.adapter";
+import { filterByGenres } from "@/adapters/filterByGenres.adapter";
+import CreateComment from "./createComment";
 
 interface MovieExtra extends Movie {
   saga?: string;
@@ -15,12 +16,14 @@ export const MovieDescription = () => {
     const { title } = useParams<{ title: string }>();
     const [movie, setMovie] = useState<Movie | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
     
     useEffect(() => {
         const fetchMovie = async () => {
           setLoading(true);
           try {
             const response = await filterByGenres.getMoviesFilterByGenres({ title: decodeURIComponent(title) });
+            console.log('id', response.data.results?.[0].id);
             setMovie(response.data.results?.[0] || null);
           } catch {
             setMovie(null);
@@ -77,23 +80,36 @@ export const MovieDescription = () => {
                     {movie.genre?.split(',').map((g: string) => (
                     <span key={g} className="bg-white/10 text-white px-3 py-1 rounded-full text-sm font-semibold">{g.trim()}</span>
                     ))}
+
                 </div>
-                <div className="flex flex-wrap items-center gap-3 mb-2 justify-center md:justify-start">
-                    <span className="text-white/80 text-sm">{movie.release_date ? new Date(movie.release_date).getFullYear() : ''}</span>
-                    <span className="text-yellow-400 text-lg">
+                <span className="text-white/80 text-sm">{movie.release_date ? new Date(movie.release_date).getFullYear() : ''}</span>
+
+                <div className="flex flex-graw items-center gap-3 mb-2 justify-center md:justify-start">
+                    <span className="text-yellow-400 text-2xl">
                     {Array.from({ length: 5 }).map((_, i) => (
                         <span key={i}>{i < Math.round(movie.rating || 0) ? '★' : '☆'}</span>
                     ))}
                     </span>
-                    <span className="text-white/80 text-sm">{movie.rating?.toFixed(1) || ''} {movieExtra.votes ? `(${movieExtra.votes})` : ''}</span>
+                    <span className="text-white/80 text-lg">{movie.rating?.toFixed(1) || ''} {movieExtra.votes ? `(${movieExtra.votes})` : ''}</span>
                 </div>
                 <div className="flex gap-2 mb-2 justify-center md:justify-start flex-wrap">
-                    <button className="bg-sky-500 hover:bg-sky-600 text-white px-4 py-1 rounded font-semibold text-sm">Añadir a Lista</button>
-                    <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm">Favorito</button>
-                    <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm">Compartir</button>
+                    <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm">Me gusta ❤️</button>
+                    <button 
+                        onClick={() => setIsCommentModalOpen(true)}
+                        className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm"
+                    >
+                        Comentar 📩
+                    </button>
                 </div>
                 </div>
             </div>
+
+            <CreateComment 
+                isOpen={isCommentModalOpen}
+                onClose={() => setIsCommentModalOpen(false)}
+                movieName={movie.title}
+                movieId={movie.id}
+            />
         </div>
     );
 };

@@ -1,18 +1,9 @@
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { Movie } from '@/app/(dashboard)/dashboard/models/movies.models';
 import { useParams } from 'next/navigation';
-import { filterByGenres } from '@/app/(dashboard)/dashboard/adapters/filterByGenres.adapter';
+import { filterByGenres } from '@/adapters/filterByGenres.adapter';
 import Link from 'next/link';
 import CreateComment from './createComment';
-
-interface MovieExtra extends Movie {
-  saga?: string;
-  votes?: number;
-  budget?: number;
-  revenue?: number;
-  status?: string;
-}
 
 export default function MovieDetails() {
   const { title } = useParams<{ title: string }>();
@@ -51,8 +42,6 @@ export default function MovieDetails() {
     );
   }
 
-  const movieExtra = movie as MovieExtra;
-
   return (
     <div className="flex flex-col gap-6 mt-10 justify-center w-full ">
  
@@ -69,35 +58,15 @@ export default function MovieDetails() {
           <div className="text-white/80 text-sm space-y-1">
             <div><span className="font-semibold">Director:</span> {movie.director || ''}</div>
             <div><span className="font-semibold">Fecha de estreno:</span> {movie.release_date ? new Date(movie.release_date).toLocaleDateString() : ''}</div>
-            <div><span className="font-semibold">Presupuesto:</span> ${movieExtra.budget || 'N/A'}</div>
+            {/* <div><span className="font-semibold">Presupuesto:</span> ${movieExtra.budget || 'N/A'}</div>
             <div><span className="font-semibold">Recaudación:</span> ${movieExtra.revenue || 'N/A'}</div>
-            <div><span className="font-semibold">Estado:</span> {movieExtra.status || ''}</div>
+            <div><span className="font-semibold">Estado:</span> {movieExtra.status || ''}</div> */}
           </div>
         </div>
       </div>
 
       {/* Reparto principal */}
-      <div className="bg-[rgb(var(--dark-blue-60))] bg-noise rounded-2xl p-6 border border-white/10">
-        <h3 className="text-lg font-bold text-white mb-4">Reparto Principal</h3>
-        <div className="flex flex-wrap gap-6">
-          {/* Simulación de reparto principal */}
-          <div className="flex flex-col items-center">
-            <Image src="/images/actor1.jpg" alt="Actor Principal" width={80} height={80} className="rounded-full object-cover mb-2" />
-            <span className="text-white font-semibold text-sm">Actor Principal</span>
-            <span className="text-white/60 text-xs">Protagonista</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image src="/images/actor2.jpg" alt="Actriz Principal" width={80} height={80} className="rounded-full object-cover mb-2" />
-            <span className="text-white font-semibold text-sm">Actriz Principal</span>
-            <span className="text-white/60 text-xs">Protagonista</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <Image src="/images/actor3.jpg" alt="Actor Secundario" width={80} height={80} className="rounded-full object-cover mb-2" />
-            <span className="text-white font-semibold text-sm">Actor Secundario</span>
-            <span className="text-white/60 text-xs">Personaje Secundario</span>
-          </div>
-        </div>
-      </div>
+ 
 
       {/* Modal de comentario */}
       <CreateComment isOpen={showCommentModal} onClose={() => setShowCommentModal(false)} movieName={movie.title} />

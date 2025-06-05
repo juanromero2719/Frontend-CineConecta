@@ -1,4 +1,4 @@
-// File: E:\proyectos de programacion\Frontend-cineConecta\cineconecta\src\app\(dashboard)\dashboard\layout.tsx
+// File: E:\proyectos\Universidad\Frontend-cineConecta\cineconecta\src\app\(dashboard)\dashboard\layout.tsx
 import * as entry from '../../../../../src/app/(dashboard)/dashboard/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

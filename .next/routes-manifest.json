@@ -49,6 +49,12 @@
       "namedRegex": "^/favicon\\.ico(?:/)?$"
     },
     {
+      "page": "/movie",
+      "regex": "^/movie(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/movie(?:/)?$"
+    },
+    {
       "page": "/register",
       "regex": "^/register(?:/)?$",
       "routeKeys": {},

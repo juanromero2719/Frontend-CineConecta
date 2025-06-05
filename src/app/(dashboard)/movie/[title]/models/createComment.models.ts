@@ -1,7 +1,7 @@
 import { Movie }from "@/app/(dashboard)/dashboard/models/movies.models";
 
 export interface CreateCommentRequest {
-    movie_name: string;
+    movie_id: number;
     content: string;
 }
 

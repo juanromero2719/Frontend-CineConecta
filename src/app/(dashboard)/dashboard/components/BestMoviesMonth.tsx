@@ -1,6 +1,6 @@
 import { useGenres } from '@/app/(dashboard)/dashboard/hooks/useGenres';
 import React, { useState, useMemo } from 'react';
-import { useFilterByGenres } from '../hooks/useFilterByGenres';
+import { useFilterByGenres } from '../../../../hooks/useFilterByGenres';
 import { Movie } from '../models/movies.models';
 import Link from 'next/link';
 

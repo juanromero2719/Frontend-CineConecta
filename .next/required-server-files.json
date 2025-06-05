@@ -98,7 +98,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "E:\\proyectos de programacion\\Frontend-cineConecta\\cineconecta",
+    "outputFileTracingRoot": "E:\\proyectos\\Universidad\\Frontend-cineConecta\\cineconecta",
     "allowedDevOrigins": [],
     "experimental": {
       "allowedDevOrigins": [],
@@ -178,7 +178,7 @@
       "forceSwcTransforms": false,
       "largePageDataBytes": 128000,
       "turbo": {
-        "root": "E:\\proyectos de programacion\\Frontend-cineConecta\\cineconecta"
+        "root": "E:\\proyectos\\Universidad\\Frontend-cineConecta\\cineconecta"
       },
       "typedRoutes": false,
       "typedEnv": false,
@@ -284,7 +284,7 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js"
   },
-  "appDir": "E:\\proyectos de programacion\\Frontend-cineConecta\\cineconecta",
+  "appDir": "E:\\proyectos\\Universidad\\Frontend-cineConecta\\cineconecta",
   "relativeAppDir": "",
   "files": [
     ".next\\routes-manifest.json",

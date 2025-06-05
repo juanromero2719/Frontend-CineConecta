@@ -15,13 +15,15 @@ interface CreateCommentProps {
   onClose: () => void;
   userName?: string;
   movieName?: string;
+  movieId?: number;
   reviews?: Review[]; // Lista de reseñas
 }
 
 export default function CreateComment({
   isOpen,
   onClose,
-  movieName,
+  // movieName,
+  movieId,
   reviews = [
     {
       user: 'JuanPerez',
@@ -43,7 +45,7 @@ export default function CreateComment({
 
   const handleSend = async () => {
     await createComment({
-      movie_name: movieName || '',
+      movie_id: movieId || 0,
       content: comment,
     });
     setSuccess(true);

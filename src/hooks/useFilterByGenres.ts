@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { filterByGenres } from '../adapters/filterByGenres.adapter';
-import { MoviesFilterByGenresResponse } from '../models/filterByGenres.models';
+import { filterByGenres } from '@/adapters/filterByGenres.adapter';
+import { MoviesFilterByGenresResponse } from '@/models/filterByGenres.models';
 
 interface Filters {
   genre?: string;

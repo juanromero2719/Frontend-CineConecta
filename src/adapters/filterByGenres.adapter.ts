@@ -3,7 +3,7 @@ import { axiosInstance } from '@/services/axiosInstance';
 import { AxiosResponse, AxiosError } from 'axios';
 
 // models
-import { MoviesFilterByGenresResponse } from '@/app/(dashboard)/dashboard/models/filterByGenres.models';
+import { MoviesFilterByGenresResponse } from '@/models/filterByGenres.models';
 
 export const filterByGenres = {
     async getMoviesFilterByGenres(params: { genre?: string; title?: string }, token?: string): Promise<AxiosResponse<MoviesFilterByGenresResponse>> {

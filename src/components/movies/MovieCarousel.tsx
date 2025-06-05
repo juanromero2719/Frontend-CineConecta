@@ -112,8 +112,8 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
                 </div>
                 {/* Info */}
                 <div className="p-4 flex flex-col gap-2 min-h-[110px]">
-                  <Link href={`/movie/${movie.title}`} className="hover:underline">
-                    <h3 className="font-semibold text-base md:text-lg text-white mb-1 truncate">
+                  <Link href={`/movie/${movie.title}`}>
+                    <h3 className="font-semibold text-base md:text-lg text-white mb-1 truncate hover:text-[rgb(var(--sky-blue))]">
                       {movie.title}
                     </h3>
                   </Link>

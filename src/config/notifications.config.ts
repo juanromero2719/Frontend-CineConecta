@@ -1,10 +1,10 @@
 import Swal from 'sweetalert2';
 
 const swalConfig = {
-    confirmButtonColor: 'rgb(var(--dark-latte))',
-    cancelButtonColor: '#d33',
-    background: 'rgb(var(--light-latte))',
-    color: 'rgb(var(--dark-latte))',
+    confirmButtonColor: 'rgb(var(--dark-blue-100))',
+    cancelButtonColor: 'rgb(var(--dark-blue-100))',
+    background: 'rgb(var(--dark-blue-100))',
+    color: 'black',
     customClass: {
         confirmButton: 'swal2-confirm',
         cancelButton: 'swal2-cancel',
