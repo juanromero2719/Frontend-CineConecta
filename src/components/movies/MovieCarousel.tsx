@@ -21,6 +21,8 @@ const ITEM_WIDTH        = 280;
 const DISPLAY_FACTOR    = 3;
 const SPEED_PX_PER_FRAME = 0.5;
 
+type GenreType = string | { name: string };
+
 const MovieCarousel: React.FC<MovieCarouselProps> = ({
   title,
   movies,
@@ -148,7 +150,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
                   {/* Géneros */}
                   <div className="flex flex-wrap gap-2 mt-2">
                     {Array.isArray(movie.genres)
-                      ? movie.genres.slice(0, 2).map((genre: any, idx: number) => (
+                      ? (movie.genres as GenreType[]).slice(0, 2).map((genre, idx) => (
                           <span key={idx} className="bg-[#1a2230] text-white/80 text-xs px-2 py-1 rounded-md">
                             {typeof genre === 'string' ? genre : genre.name}
                           </span>
