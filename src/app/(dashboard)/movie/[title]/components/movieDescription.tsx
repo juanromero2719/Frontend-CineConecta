@@ -5,6 +5,9 @@ import { useParams } from "next/navigation";
 import { Movie } from "@/app/(dashboard)/dashboard/models/movies.models";
 import { filterByGenres } from "@/adapters/filterByGenres.adapter";
 import CreateComment from "./createComment";
+import { useLikeMovie } from "@/app/(dashboard)/movie/[title]/hooks/useLikeMovie";
+import { useUnlikeMovie } from "@/app/(dashboard)/movie/[title]/hooks/useUnlikeMovie";
+import { useGetLikeMovie } from "@/app/(dashboard)/movie/[title]/hooks/useGetLikeMovie";
 
 interface MovieExtra extends Movie {
   saga?: string;
@@ -16,6 +19,10 @@ export const MovieDescription = () => {
     const [movie, setMovie] = useState<Movie | null>(null);
     const [loading, setLoading] = useState(true);
     const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+    const { likeMovie, loading: likeLoading } = useLikeMovie();
+    const { unlikeMovie, loading: unlikeLoading } = useUnlikeMovie();
+    const [hasLiked, setHasLiked] = useState(false);
+    const { liked, loading: getLikeLoading } = useGetLikeMovie(movie ? String(movie.id) : null);
     
     useEffect(() => {
         const fetchMovie = async () => {
@@ -33,6 +40,10 @@ export const MovieDescription = () => {
         fetchMovie();
       }, [title]);
 
+    useEffect(() => {
+        if (liked !== null) setHasLiked(liked);
+    }, [liked]);
+
     if (loading) {
         return <div className="flex flex-col items-center justify-center min-h-[60vh]"><p>Cargando...</p></div>;
     }
@@ -42,6 +53,16 @@ export const MovieDescription = () => {
     }
 
     const movieExtra = movie as MovieExtra;
+
+    const handleLikeToggle = async () => {
+        if (hasLiked) {
+            const res = await unlikeMovie(String(movie.id));
+            if (res) setHasLiked(false);
+        } else {
+            const res = await likeMovie(String(movie.id));
+            if (res) setHasLiked(true);
+        }
+    };
 
     return (
         <div
@@ -91,7 +112,16 @@ export const MovieDescription = () => {
                     <span className="text-white/80 text-lg">{movie.rating?.toFixed(1) || ''} {movieExtra.votes ? `(${movieExtra.votes})` : ''}</span>
                 </div>
                 <div className="flex gap-2 mb-2 justify-center md:justify-start flex-wrap">
-                    <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm">Me gusta ❤️</button>
+                    <button
+                        onClick={handleLikeToggle}
+                        disabled={likeLoading || unlikeLoading || getLikeLoading}
+                        className={`px-4 py-1 rounded font-semibold text-sm transition
+                            ${hasLiked ? "bg-yellow-400 text-black" : "bg-white/10 hover:bg-white/20 text-white"}
+                            ${(likeLoading || unlikeLoading || getLikeLoading) ? "opacity-60 cursor-wait" : ""}
+                        `}
+                    >
+                        {hasLiked ? "¡Te gusta! ❤️" : "Me gusta ❤️"}
+                    </button>
                     <button 
                         onClick={() => setIsCommentModalOpen(true)}
                         className="bg-white/10 hover:bg-white/20 text-white px-4 py-1 rounded font-semibold text-sm"

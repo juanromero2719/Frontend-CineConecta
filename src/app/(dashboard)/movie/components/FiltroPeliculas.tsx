@@ -59,13 +59,7 @@ export default function FiltroPeliculas() {
           <div className="flex gap-4">
             <div className="relative flex-1">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <Image
-                  src="/images/search.svg"
-                  alt="Buscar"
-                  width={20}
-                  height={20}
-                  className="w-5 h-5"
-                />
+                🔍
               </span>
               <input
                 type="text"
@@ -81,7 +75,7 @@ export default function FiltroPeliculas() {
               className="px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors flex items-center gap-2"
             >
               <Image
-                src="/images/filter.svg"
+                src="/images/filter.png"
                 alt="Filtrar"
                 width={20}
                 height={20}
