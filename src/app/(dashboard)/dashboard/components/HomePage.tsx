@@ -1,81 +1,32 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import MovieCarousel from '@/components/movies/MovieCarousel';
-import { useRecentMovies } from '../hooks/useRecentMovies';
-import { BannerHomePage } from './BannerHomePage';  
+import { useRecentMovies } from '@/app/(dashboard)/dashboard/hooks/useRecentMovies';
+import { BannerHomePage } from '@/app/(dashboard)/dashboard/components/BannerHomePage';  
+import { useUserData } from '@/hooks/useUserData';
+import { useFeaturedMovies } from '@/app/(dashboard)/dashboard/hooks/useFeaturedMovies';
 // import WhyChooseCineConecta from './WhyChooseCineConecta';
 // import { useUsers } from '@/app/(dashboard)/dashboard/hooks/useUser';
 
 const HomePage: React.FC = () => {
+
+  // id del usuario
+  const [userId, setUserId] = useState<string | null>(null);
   
   // Peliculas recientes
   const { data: recentMovies, loading: loadingRecentMovies, error: errorRecentMovies } = useRecentMovies();
-  const error = errorRecentMovies ? new Error(errorRecentMovies) : null;
+  // obtener datos del usuario
+  const { data: userData } = useUserData();
+  // peliculas destacadas
+  const { data: featuredMovies, loading: loadingFeaturedMovies, error: errorFeaturedMovies } = useFeaturedMovies(userId, 10);
 
-  const moviesData = [
-    {
-      id: 1,
-      title: 'Thunderbolts',
-      description: 'Descripción de la película',
-      genre: 'Acción',
-      director: 'Director 1',
-      release_date: '2024-01-01',
-      rating: 2.0,
-      poster_url: '/images/thunderbolts.jpg',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    },
-    {
-      id: 2,
-      title: 'Thunderbolts',
-      description: 'Descripción de la película',
-      genre: 'Acción',
-      director: 'Director 2',
-      release_date: '2024-01-01',
-      rating: 2.0,
-      poster_url: '/images/thunderbolts.jpg',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    },
-    {
-      id: 3,
-      title: 'Thunderbolts',
-      description: 'Descripción de la película',
-      genre: 'Acción',
-      director: 'Director 3',
-      release_date: '2024-01-01',
-      rating: 2.0,
-      poster_url: '/images/thunderbolts.jpg',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    },
-    {
-      id: 4,
-      title: 'Thunderbolts',
-      description: 'Descripción de la película',
-      genre: 'Acción',
-      director: 'Director 4',
-      release_date: '2024-01-01',
-      rating: 2.0,
-      poster_url: '/images/thunderbolts.jpg',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    },
-    {
-      id: 5,
-      title: 'Thunderbolts',
-      description: 'Descripción de la película',
-      genre: 'Acción',
-      director: 'Director 5',
-      release_date: '2024-01-01',
-      rating: 2.0,
-      poster_url: '/images/thunderbolts.jpg',
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+  useEffect(() => {
+    if (userData) {
+      setUserId(userData.id);
     }
-  ];
+  }, [userData]);
 
   // Referencias para cada sección
   const tendenciaRef = useRef(null);
@@ -101,7 +52,13 @@ const HomePage: React.FC = () => {
           animate={tendenciaInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <MovieCarousel title="🏹 Películas en tendencia" subtitle="Las películas más populares en este momento" movies={recentMovies?.results || []} loading={loadingRecentMovies} error={error} />
+          <MovieCarousel
+            title="🏹 Películas en tendencia"
+            subtitle="Las películas más populares en este momento"
+            movies={recentMovies?.results || []}
+            loading={loadingRecentMovies}
+            error={errorRecentMovies ? new Error(errorRecentMovies) : null}
+          />
         </motion.div>
         <motion.div
           ref={ultimasRef}
@@ -110,7 +67,13 @@ const HomePage: React.FC = () => {
           animate={ultimasInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <MovieCarousel title="🆕 Últimas incorporaciones" subtitle="Nuevas películas mas recientes en nuestra plataforma" movies={moviesData} loading={loadingRecentMovies} error={error}/>
+          <MovieCarousel
+            title="🆕 Últimas incorporaciones"
+            subtitle="Nuevas películas mas recientes en nuestra plataforma"
+            movies={featuredMovies?.movies || []}
+            loading={loadingFeaturedMovies}
+            error={errorFeaturedMovies ? new Error(errorFeaturedMovies) : null}
+          />
         </motion.div>
       </div>
   

@@ -12,7 +12,6 @@ interface MovieExtra extends Movie {
 }
 
 export const MovieDescription = () => {
-
     const { title } = useParams<{ title: string }>();
     const [movie, setMovie] = useState<Movie | null>(null);
     const [loading, setLoading] = useState(true);
@@ -80,7 +79,6 @@ export const MovieDescription = () => {
                     {movie.genre?.split(',').map((g: string) => (
                     <span key={g} className="bg-white/10 text-white px-3 py-1 rounded-full text-sm font-semibold">{g.trim()}</span>
                     ))}
-
                 </div>
                 <span className="text-white/80 text-sm">{movie.release_date ? new Date(movie.release_date).getFullYear() : ''}</span>
 

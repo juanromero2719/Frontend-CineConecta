@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const BestMoviesMonth: React.FC = () => {
     // Generos
-    const { data: genres, loading: loadingGenres, error: errorGenres } = useGenres();
+    const { genres, loading: loadingGenres, error: errorGenres } = useGenres();
     const [selectedGenre, setSelectedGenre] = useState<string>('');
 
     const filters = useMemo(() => (
@@ -29,7 +29,7 @@ const BestMoviesMonth: React.FC = () => {
                 {errorGenres && <p className="text-red-500 mb-2">{errorGenres}</p>}
                 <select className="w-full border border-gray-300 rounded px-2 py-1 text-2xl mb-12 text-[rgb(var(--gray))]" onChange={handleGenreChange} value={selectedGenre}>
                     <option value="">Filtrar por género</option>
-                    {genres?.genres.map((genre) => (
+                    {genres.map((genre) => (
                         <option key={genre} value={genre}>{genre}</option>
                     ))}
                 </select>

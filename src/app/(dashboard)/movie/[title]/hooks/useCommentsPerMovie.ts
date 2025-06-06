@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import { commentsPerMovie } from '@/app/(dashboard)/movie/[title]/adapters/commentsPerMovie.adapter';
 import { MovieReview } from '@/app/(dashboard)/movie/[title]/models/commentsPerMovie.models';
@@ -7,6 +7,7 @@ interface UseCommentsPerMovieResult {
   comments: MovieReview[] | null;
   loading: boolean;
   error: string | null;
+  refetch: () => Promise<void>;
 }
 
 export function useCommentsPerMovie(movieId: string): UseCommentsPerMovieResult {
@@ -14,25 +15,25 @@ export function useCommentsPerMovie(movieId: string): UseCommentsPerMovieResult 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchComments = useCallback(async () => {
     if (!movieId) return;
-
-    const fetchComments = async () => {
-      try {
-        const response = await commentsPerMovie.getCommentsPerMovie(movieId);
-        setComments(response.data as unknown as MovieReview[]);
-        setError(null);
-      } catch (err) {
-        const axiosError = err as AxiosError;
-        setError(axiosError.message);
-        setComments(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchComments();
+    setLoading(true);
+    try {
+      const response = await commentsPerMovie.getCommentsPerMovie(movieId);
+      setComments(response.data as unknown as MovieReview[]);
+      setError(null);
+    } catch (err) {
+      const axiosError = err as AxiosError;
+      setError(axiosError.message);
+      setComments(null);
+    } finally {
+      setLoading(false);
+    }
   }, [movieId]);
 
-  return { comments, loading, error };
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
+
+  return { comments, loading, error, refetch: fetchComments };
 }

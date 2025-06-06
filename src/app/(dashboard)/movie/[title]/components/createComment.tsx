@@ -16,13 +16,12 @@ interface CreateCommentProps {
   userName?: string;
   movieName?: string;
   movieId?: number;
-  reviews?: Review[]; // Lista de reseñas
+  reviews?: Review[];
 }
 
 export default function CreateComment({
   isOpen,
   onClose,
-  // movieName,
   movieId,
   reviews = [
     {
@@ -39,22 +38,20 @@ export default function CreateComment({
   const [hover, setHover] = useState<number | null>(null);
   const [comment, setComment] = useState('');
   const { createComment, loading } = useCreateComment();
-  const [, setSuccess] = useState(false);
 
   if (!isOpen) return null;
 
   const handleSend = async () => {
-    await createComment({
-      movie_id: movieId || 0,
-      content: comment,
-    });
-    setSuccess(true);
-    setComment('');
-    setRating(0);
-    setTimeout(() => {
-      setSuccess(false);
+    try {
+      await createComment({
+        movie_id: movieId || 0,
+        content: comment,
+      });
       onClose();
-    }, 1200);
+      window.location.reload();
+    } catch (error) {
+      console.error('Error al crear el comentario:', error);
+    }
   };
 
   return (
@@ -107,11 +104,9 @@ export default function CreateComment({
             onClick={handleSend}
             disabled={loading || !comment.trim()}
           >
-            Publicar Reseña
+            {loading ? 'Publicando...' : 'Publicar Reseña'}
           </button>
         </div>
-
-
       </div>
     </div>
   );

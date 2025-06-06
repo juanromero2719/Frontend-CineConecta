@@ -5,6 +5,8 @@ import { Movie } from '@/app/(dashboard)/dashboard/models/movies.models';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface MovieCarouselProps {
   title: string;
@@ -29,6 +31,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const rafId     = useRef<number | null>(null);
   const hovering  = useRef(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const renderMovies = movies ? Array(DISPLAY_FACTOR).fill(movies).flat() : [];
 
@@ -58,6 +61,20 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
     };
   }, [autoScroll]);
 
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
+  const handleClick = (movie: Movie) => {
+    if (!isDragging) {
+      window.location.href = `/movie/${encodeURIComponent(movie.title)}`;
+    }
+  };
+
   if (error)    return <p className="text-center text-red-700">{error.message}</p>;
   if (loading)  return <p className="text-center">Cargando…</p>;
   if (!movies?.length) return null;
@@ -79,21 +96,26 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
 
       {/* Carrusel */}
       <div className="relative">
-        <div
+        <motion.div
           ref={scrollRef}
           className="hide-scrollbar flex gap-6 overflow-x-auto px-2 py-2"
-          onMouseEnter={() => (hovering.current = true)}
-          onMouseLeave={() => (hovering.current = false)}
+          drag="x"
+          dragConstraints={{ left: -100, right: 100 }}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+          whileTap={{ cursor: 'grabbing' }}
         >
           {renderMovies.map((movie, i) => {
             const poster = movie.poster_url && movie.poster_url.trim() !== ''
               ? movie.poster_url
               : '/images/default-movie.png';
             return (
-              <div
+              <motion.div
                 key={`${movie.id}-${i}`}
                 className="flex-shrink-0 rounded-xl bg-[#232b38] text-white shadow-lg relative overflow-hidden border border-white/10"
                 style={{ width: ITEM_WIDTH }}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => handleClick(movie)}
               >
                 {/* Imagen */}
                 <div className="relative">
@@ -117,28 +139,44 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({
                       {movie.title}
                     </h3>
                   </Link>
-                  <div className="flex items-center gap-2 text-xs text-white/70">
-                    <span className="flex items-center gap-1">
-                      <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M7 10V7a5 5 0 1 1 10 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a3 3 0 1 1 6 0v3H9V7Z"/></svg>
-                      {movie.year}
+                  {movie.release_date && (
+                    <span className="text-white/70 text-xs mb-1">
+                      {new Date(movie.release_date).getFullYear()}
                     </span>
-                  </div>
+                  )}
+ 
                   {/* Géneros */}
                   <div className="flex flex-wrap gap-2 mt-2">
-                    {movie.genres?.slice(0, 2).map((genre: string, idx: number) => (
-                      <span key={idx} className="bg-[#1a2230] text-white/80 text-xs px-2 py-1 rounded-md">
-                        {genre}
-                      </span>
-                    ))}
-                    {movie.genres && movie.genres.length > 2 && (
-                      <span className="bg-[#1a2230] text-white/60 text-xs px-2 py-1 rounded-md">+{movie.genres.length - 2}</span>
-                    )}
+                    {Array.isArray(movie.genres)
+                      ? movie.genres.slice(0, 2).map((genre: any, idx: number) => (
+                          <span key={idx} className="bg-[#1a2230] text-white/80 text-xs px-2 py-1 rounded-md">
+                            {typeof genre === 'string' ? genre : genre.name}
+                          </span>
+                        ))
+                      : movie.genre
+                      ? movie.genre.split(',').slice(0, 2).map((g: string, idx: number) => (
+                          <span key={idx} className="bg-[#1a2230] text-white/80 text-xs px-2 py-1 rounded-md">
+                            {g.trim()}
+                          </span>
+                        ))
+                      : null}
+                    {Array.isArray(movie.genres)
+                      ? movie.genres.length > 2 && (
+                          <span className="bg-[#1a2230] text-white/60 text-xs px-2 py-1 rounded-md">
+                            +{movie.genres.length - 2}
+                          </span>
+                        )
+                      : movie.genre && movie.genre.split(',').length > 2 && (
+                          <span className="bg-[#1a2230] text-white/60 text-xs px-2 py-1 rounded-md">
+                            +{movie.genre.split(',').length - 2}
+                          </span>
+                        )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

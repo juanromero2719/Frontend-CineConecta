@@ -1,3 +1,10 @@
+export interface Genre {
+  id: number;
+  name: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface GenreListResponse {
-    genres: string[];
+  genres: (string | Genre)[];
 }

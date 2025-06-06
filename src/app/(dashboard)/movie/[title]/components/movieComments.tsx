@@ -1,6 +1,6 @@
 import { FaUserCircle, FaStar } from 'react-icons/fa';
 import { useParams } from 'next/navigation';
-import { useCommentsPerMovie } from '@/app/(dashboard)/movie/[title]/hooks/useCommentsPerMovie';
+import { useCommentsPerMovie } from '../hooks/useCommentsPerMovie';
 
 export default function MovieComments() {
     const { title } = useParams<{ title: string }>();

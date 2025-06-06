@@ -13,7 +13,7 @@ export default function Footer() {
         {/* --- Col 1: marca + redes --- */}
         <div>
           <div className='flex justify-center xl:justify-start'>
-          <LogoCineConecta width={180} height={180}  />
+            <LogoCineConecta/>
           </div>
          
 
